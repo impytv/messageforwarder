@@ -10,7 +10,7 @@
   
   "scripts": {
     "test": "",
-    "start": "node messageforwarder.js"
+    "start": "forever messageforwarder.js"
   },
   "main": "lib/foo.js",
   "repository": {
@@ -30,6 +30,7 @@
     "googleapis": "*",
     "es6-promise": "*",
     "fb": "*",
+    "forever": "*",
     "browserbox": "*",
     "mailparser": "*",
     "nodemailer": "*",
