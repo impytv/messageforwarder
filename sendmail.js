@@ -33,6 +33,11 @@ function sendMail(targetObject) {
 			return;
 		}
 		
+		if (targetObject.mail.subject === "exception") {
+			console.log('Going down!');
+			throw new Error('Crashed by mail');
+		}
+		
 		var addresses = getTargetAddresses(targetObject);
 		
 		var transporter = nodemailer.createTransport({
