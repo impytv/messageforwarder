@@ -6,8 +6,8 @@ function sendReceipt(targetObject) {
 	}
 		
 	var receiptMailHtml = targetObject.receipts.join('<BR>');
-	receiptMailHtml = receiptMailHtml + '<BR>' + targetObject.mail.subject;
-	receiptMailHtml = receiptMailHtml + '<BR>' + targetObject.mail.html;
+	receiptMailHtml = receiptMailHtml + '<BR>Emne: ' + targetObject.mail.subject;
+	receiptMailHtml = receiptMailHtml + '<BR>Tekst: ' + targetObject.mail.html;
 	
 	var transporter = nodemailer.createTransport({
 	    service: 'Gmail',
@@ -17,7 +17,7 @@ function sendReceipt(targetObject) {
 	var mailOptions = {
         from: targetObject.account.fromAddress,
         to: targetObject.mail.from[0].address,
-        subject: targetObject.mail.subject,
+        subject: 'Kvittering: ' + targetObject.mail.subject,
         text: receiptMailHtml,
         html: receiptMailHtml
     };
