@@ -14,7 +14,7 @@ function getMatchedTargetObject(mail, account, setupRow) {
                         mail: mail,
                         setupRow: setupRow,
                         targetRows: targetRows,
-                        receipts: []
+                        receipts: ['Mottatt mail på addressen ' + mail.to[0].address]
                   });
             });
       });

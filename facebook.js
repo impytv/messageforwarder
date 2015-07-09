@@ -1,5 +1,10 @@
 var Promise = require('es6-promise').Promise;
 
+function isPositiveNumber(input){
+    var RE = /^\d+$/;
+    return (RE.test(input));
+}
+
 function postToFacebook(targetObject) {
 	return new Promise(function (resolve, reject) {
 		if (targetObject === undefined) {
@@ -7,7 +12,7 @@ function postToFacebook(targetObject) {
 			return;
 		}
 		
-		if (!targetObject.setupRow.facebookgroup) {
+		if (!isPositiveNumber(targetObject.setupRow.facebookgroup)) {
 			resolve(targetObject);
 			return;
 		}
