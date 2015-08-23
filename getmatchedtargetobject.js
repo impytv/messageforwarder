@@ -1,12 +1,12 @@
 var Promise = require('es6-promise').Promise;
 
-var getSpreadSheetRows = require('./getspreadsheetrows.js');
+var spreadSheetRows = require('./spreadsheetrows.js');
 
 var util = require('./util.js');
 
 function getMatchedTargetObject(mail, account, setupRow) {
       return new Promise(function (resolve, reject) {
-            var targetRowsPromise = getSpreadSheetRows(account, setupRow['sheetkey']);      
+            var targetRowsPromise = spreadSheetRows.getRows(account, setupRow['sheetkey']);      
       	
       	targetRowsPromise.then(function (targetRows) {
                   resolve({
@@ -22,7 +22,7 @@ function getMatchedTargetObject(mail, account, setupRow) {
 
 function getMatchedTargetObjectGivenMail(mail, account) {
       return new Promise(function (resolve, reject) {
-      	var setupRowsPromise = getSpreadSheetRows(account, account.setupSheet);           
+      	var setupRowsPromise = spreadSheetRows.getRows(account, account.setupSheet);           
             var address = mail.to[0].address;
       	
       	setupRowsPromise.then(function (setupRows) {

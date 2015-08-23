@@ -7,6 +7,14 @@ module.exports = {
 	},
 	
 	isNotBlankString: function (row, field) {
-		return row[field] !== undefined && row[field].toString().length > 0;
+		var s = row[field];
+		
+		if (s === undefined) {
+			return false;
+		}
+		
+		s = s.toString().trim();
+		
+		return s.length > 0;
 	}
 };

@@ -7,6 +7,7 @@ var sendMail = require('./sendmail.js');
 var sendReceipt = require('./sendreceipt.js');
 var postToFacebook = require('./facebook.js');
 var postToWordpress = require('./wordpress.js');
+var sms = require('./sms.js');
 
 config.accounts.forEach(function (account) {	
 	readMails(account, function (mail) {	
@@ -14,7 +15,7 @@ config.accounts.forEach(function (account) {
 		 .then(verifySender)
 		 .then(postToFacebook)
 		 .then(postToWordpress)
-		 .then(sendMail)					 
+		 .then(sendMail)		 				 
 		 .then(sendReceipt);		 
 	});
 });

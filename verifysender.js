@@ -12,7 +12,7 @@ function verifySender(targetObject) {
 		var sender = targetObject.mail.from[0].address;	
 		var verified = targetObject.targetRows.some(function(targetRow) {
 			if (util.isNotBlankString(targetRow, 'verv') &&
-			    (util.compareStringsIgnorecase(targetRow['e-post'], sender) ||
+			    (util.compareStringsIgnorecase(targetRow['epost'], sender) ||
 				 util.compareStringsIgnorecase(targetRow['epost2'], sender))) {
 				console.log('Sender verified : ' + sender);
 				return true;

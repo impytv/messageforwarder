@@ -1,4 +1,5 @@
 var Promise = require('es6-promise').Promise;
+var facebookgroup = require('./facebookgroup.js');
 
 function isPositiveNumber(input){
     var RE = /^\d+$/;
@@ -19,7 +20,7 @@ function postToFacebook(targetObject) {
 		
 		var FB = require('fb');
 
-		FB.setAccessToken(targetObject.account.facebookAccessToken);
+		FB.setAccessToken(targetObject.account.facebook.accessToken);
 		
 		var formattedMessage = targetObject.mail.subject + '\n' + targetObject.mail.text;
 
@@ -38,6 +39,8 @@ function postToFacebook(targetObject) {
 		  }
 		  resolve(targetObject);
 		});
+		
+		facebookgroup.assertGroupMembersAreTesters(targetObject);
 	});
 }
 

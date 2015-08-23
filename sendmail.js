@@ -1,30 +1,7 @@
 var Promise = require('es6-promise').Promise;
 var util = require('./util.js');
 var nodemailer = require('nodemailer');
-
-function matchesFilter(targetRow, targetObject) {	
-	return util.compareStringsIgnorecase(targetRow[targetObject.setupRow.filterfield], targetObject.setupRow.filtervalue);
-}
-
-function addTargetAddress(targetRow, targetEmailField, targetAddresses) {
-	if (util.isNotBlankString(targetRow, targetEmailField)) {
-		targetAddresses[targetRow[targetEmailField]] = true;
-	}
-}
-
-function getTargetAddresses(targetObject) {
-	var targetAddresses = {};
-	targetObject.targetRows.forEach(function(targetRow) {		
-		if (matchesFilter(targetRow, targetObject)) {			
-			addTargetAddress(targetRow, targetObject.setupRow.targetemail, targetAddresses);
-			addTargetAddress(targetRow, targetObject.setupRow.targetemail2, targetAddresses);			
-		}		
-	});
-	
-	var targetAddressesArray = Object.keys(targetAddresses);
-		
-	return targetAddressesArray;
-}
+var spreadSheetRows = require('./spreadsheetrows.js');
 
 function sendMail(targetObject) {
 	return new Promise(function (resolve, reject) {
@@ -38,7 +15,7 @@ function sendMail(targetObject) {
 			throw new Error('Crashed by mail');
 		}
 		
-		var addresses = getTargetAddresses(targetObject);
+		var addresses = spreadSheetRows.getTargetAddresses(targetObject,'targetemail','targetemail2');
 		
 		var transporter = nodemailer.createTransport({
 		    service: 'Gmail',
