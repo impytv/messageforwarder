@@ -10,12 +10,12 @@ function postToWordpress(targetObject) {
 			return;
 		}
         
+        targetObject.mail = util.assertSubject(targetObject.mail);
+        
         if (!targetObject.setupRow.wordpresscategory) {
             resolve(targetObject);
             return;
-        }
-        
-        targetObject.mail = util.assertSubject(targetObject.mail);
+        }               
         
         var client = wordpress.createClient(targetObject.account.wordpress.settings);
         
