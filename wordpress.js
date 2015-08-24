@@ -1,4 +1,5 @@
 var wordpress = require( "wordpress" );
+var util = require('./util.js');
 
 var Promise = require('es6-promise').Promise;
 
@@ -13,6 +14,8 @@ function postToWordpress(targetObject) {
             resolve(targetObject);
             return;
         }
+        
+        targetObject.mail = util.assertSubject(targetObject.mail);
         
         var client = wordpress.createClient(targetObject.account.wordpress.settings);
         
