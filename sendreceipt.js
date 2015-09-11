@@ -5,8 +5,10 @@ function sendReceipt(targetObject) {
 		return;
 	}
 		
+	var mailText = targetObject.mail.html || targetObject.mail.text;
+		
 	var receiptMailHtml = targetObject.receipts.join('<BR>');
-	receiptMailHtml = receiptMailHtml + '<BR>Melding:<BR><B>' + targetObject.mail.subject + '</B><BR>' + targetObject.mail.html;	
+	receiptMailHtml = receiptMailHtml + '<BR>Melding:<BR><B>' + targetObject.mail.subject + '</B><BR>' + mailText;	
 	
 	var transporter = nodemailer.createTransport({
 	    service: 'Gmail',
